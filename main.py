@@ -22,6 +22,17 @@ def get_code_explanation(code_snippet):
 
 if __name__ == "__main__":
     print("AI Code Explainer")
-    code = input("Paste your Python code snippet here:\n")
-    explanation = get_code_explanation(code)
-    print("\nExplanation:\n", explanation)
+    
+    try:
+        print("Paste your Python code snippet below (end input with Ctrl+D on Unix/Linux/Mac or Ctrl+Z on Windows):")
+        code = "".join(iter(input, ""))
+        
+        if not code.strip():
+            print("No code snippet provided. Exiting.")
+        else:
+            explanation = get_code_explanation(code)
+            print("\nExplanation:\n", explanation)
+    except EOFError:
+        print("\nInput was terminated. No code snippet provided.")
+    except KeyboardInterrupt:
+        print("\nOperation canceled by the user.")
